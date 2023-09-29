@@ -1,6 +1,8 @@
-import Home from "./pages/Home/Home";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import "./index.css";
 import Chat from "./pages/Chat/Chat";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
 
 const App = () => {
   return (
@@ -12,6 +14,6 @@ const App = () => {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
-export default App
+export default App;
