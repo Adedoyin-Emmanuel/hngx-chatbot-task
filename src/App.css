@@ -1,42 +1,57 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@font-face {
+  font-family: Campton;
+  src: url("./assets/fonts/campton.otf");
+}
+* {
+  font-family: Campton !important;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+html {
+  scroll-behavior: smooth;
 }
 
-@keyframes logo-spin {
-  from {
+body {
+  overflow-x: hidden !important;
+}
+
+/* Hide default scrollbar */
+::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* Customize scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Change this color as needed */
+}
+
+/* Customize scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #8684848e; /* Change this color as needed */
+  border-radius: 6px;
+}
+
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #34d399;
+  animation: spin 1s infinite linear;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
