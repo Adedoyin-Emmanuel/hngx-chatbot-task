@@ -1,9 +1,9 @@
 @font-face {
-  font-family: Campton;
-  src: url("./assets/fonts/campton.otf");
+  font-family: Poppins;
+  src: url("./assets/fonts/poppins.ttf");
 }
 * {
-  font-family: Campton !important;
+  font-family: Poppins !important;
 }
 
 html {

@@ -1,11 +1,18 @@
 import React from "react";
 import "./ButtonStyle.css";
 
-const Button = () => {
+interface ButtonProps {
+  className?: string;
+  children: React.ReactNode;
+}
+
+const Button = ({ className, children }: ButtonProps) => {
   return (
-    <React.Fragment>
-      <h1>Button works!</h1>
-    </React.Fragment>
+    <button
+      className={`bg-sky-400 text-white p-3 capitalize text-[16px] rounded border-transparent border-4 hover:border-sky-300 transition-all duration-100 ease-linear ${className}`}
+    >
+      {children}
+    </button>
   );
 };
 
