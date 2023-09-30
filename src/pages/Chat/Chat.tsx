@@ -64,7 +64,7 @@ const Chat = () => {
       <div
         id="chat-container"
         ref={chatContainerRef}
-        className="w-11/12 md:w-1/2 mx-auto bg-white rounded-lg overflow-y-auto"
+        className="w-11/12 md:w-1/2 mx-auto bg-white rounded-lg "
       >
         {messages.map((message, index) => (
           <div
@@ -87,21 +87,27 @@ const Chat = () => {
         onSubmit={handleSubmit}
         className="mx-auto w-11/12 z-50 bg-slate-50 md:w-1/2 fixed bottom-0 left-0 right-0 mt-10"
       >
-        <section className="grouped-item">
-          <input
-            type="text"
-            placeholder="Type your message..."
-            className="w-full p-4 rounded focus:outline-none focus:ring ring border-sky-300 "
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white rounded-lg px-4 py-2 mt-2 hover:bg-blue-600 transition"
+        <input
+          type="text"
+          placeholder="Type your message..."
+          className="w-full p-4 rounded focus:outline-none focus:ring ring border-sky-300 my-5"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit" className="absolute top-9 right-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            className="text-sky-500"
           >
-            Send
-          </button>
-        </section>
+            <path
+              d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"
+              fill="currentColor"
+            ></path>
+          </svg>
+        </button>
       </form>
     </div>
   );
