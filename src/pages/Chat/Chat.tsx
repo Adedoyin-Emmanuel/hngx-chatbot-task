@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import BotImage from "./../../assets/bot.svg";
 import UserImage from "./../../assets/user.svg";
@@ -8,6 +9,7 @@ const Chat = () => {
   const [input, setInput] = useState<string>("");
   const botTypingSpeed = 25;
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const backendEndpoint = import.meta.env.VITE_API_URL;
 
   const addMessage = (message: string, isUser: boolean) => {
     const newMessage = {
@@ -25,7 +27,7 @@ const Chat = () => {
     for (let i = 0; i < message.length; i++) {
       await new Promise((resolve) => setTimeout(resolve, botTypingSpeed));
       setMessages((prevMessages) => [
-        ...prevMessages.slice(0, -1), // Remove the last message
+        ...prevMessages.slice(0, -1),
         {
           text: `${prevMessages[prevMessages.length - 1].text}${message[i]}`,
           isUser: false,
@@ -34,6 +36,7 @@ const Chat = () => {
       scrollToBottom();
     }
   };
+
   const scrollToBottom = () => {
     const chatContainer = document.getElementById("chat-container");
     if (chatContainer) {
@@ -50,7 +53,22 @@ const Chat = () => {
     addMessage(`${input}`, true);
     setInput("");
 
-    await typeMessage(`Thanks for your message`);
+    // Fetch the data
+    try {
+      const response = await axios.post(backendEndpoint, {
+        message: input,
+      });
+
+
+      if (response.data.code === 200) {
+        await typeMessage(response.data.data.chatbot);
+      } else {
+        await typeMessage("Oops! Something went wrong.");
+      }
+    } catch (error) {
+      console.error("API error:", error);
+      await typeMessage("Oops! An error occurred.");
+    }
 
     scrollToBottom();
   };
@@ -69,14 +87,14 @@ const Chat = () => {
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`p-2 mt-4 mb-4 flex items-center capitalize gap-x-5 ${
+            className={`p-2 mt-4 mb-4 flex items-start capitalize gap-x-5 ${
               message.isUser ? "bg-blue-200" : "bg-gray-200"
             } rounded-lg mb-2`}
           >
             {/* <p className="text-sm">{message.isUser ? "User" : "Bot"}</p> */}
             <img
               src={message.isUser ? UserImage : BotImage}
-              className="rounded-full w-10 h-10"
+              className=" rounded-full w-10 h-10"
             />
 
             <p className="text-lg">{message.text}</p>
@@ -90,7 +108,7 @@ const Chat = () => {
         <input
           type="text"
           placeholder="Type your message..."
-          className="w-full p-4 rounded focus:outline-none focus:ring ring border-sky-300 my-5"
+          className="w-full p-4 rounded focus:outline-none focus:ring ring border-sky-200 my-5"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
