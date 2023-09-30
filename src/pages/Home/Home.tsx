@@ -1,7 +1,13 @@
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import "./HomeStyle.css";
 
 const Home = (): JSX.Element => {
+  const navigateTo = useNavigate();
+
+  const navigateToBot = () => {
+    navigateTo("/chat");
+  };
   return (
     <section className="w-screen h-screen flex items-center justify-center">
       <section className="modal bg-slate-50 shadow w-11/12 md:w-2/4 lg:w-1/4 h-72 rounded p-4 flex flex-col justify-around">
@@ -13,7 +19,9 @@ const Home = (): JSX.Element => {
           </p>
         </section>
         <section className="flex items-center justify-center mt-10">
-          <Button className="w-full">chat with krisp</Button>
+          <Button className="w-full" onClick={navigateToBot}>
+            chat with krisp
+          </Button>
         </section>
       </section>
     </section>
